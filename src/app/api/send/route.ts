@@ -149,6 +149,7 @@ export async function POST(request: Request) {
         region,
         city,
         userAgent,
+        ipAddress: ip,
         distinctId: id,
         createdAt,
       });
@@ -239,6 +240,7 @@ export async function POST(request: Request) {
         region,
         city,
         userAgent,
+        ipAddress: ip,
 
         // Events
         eventName: name,

@@ -43,6 +43,7 @@ model Session {
   region     String?   @db.VarChar(20)
   city       String?   @db.VarChar(50)
   userAgent  String?   @map("user_agent") @db.VarChar(512)
+  ipAddress  String?   @map("ip_address") @db.VarChar(45)
   distinctId String?   @map("distinct_id") @db.VarChar(50)
   createdAt  DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
 

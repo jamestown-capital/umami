@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { DateDistance } from '@/components/common/DateDistance';
 import { TypeIcon } from '@/components/common/TypeIcon';
 import { useFormat, useLocale, useMessages, useRegionNames } from '@/components/hooks';
-import { Calendar, KeyRound, Landmark, MapPin, Monitor } from '@/components/icons';
+import { Calendar, Globe, KeyRound, Landmark, MapPin, Monitor } from '@/components/icons';
 
 export function SessionInfo({ data }) {
   const { locale } = useLocale();
@@ -61,7 +61,11 @@ export function SessionInfo({ data }) {
         {formatValue(data?.device, 'device')}
       </Info>
 
-      <Info label={formatMessage(labels.userAgent)} icon={<Monitor />}>
+      <Info label={formatMessage(labels.ipAddress)} icon={<Globe />}>
+        {data?.ipAddress}
+      </Info>
+
+      <Info label={formatMessage(labels.userAgent)} icon={<Monitor />} fullWidth>
         {data?.userAgent}
       </Info>
     </Grid>
@@ -72,13 +76,15 @@ const Info = ({
   label,
   icon,
   children,
+  fullWidth,
 }: {
   label: string;
   icon?: ReactNode;
   children: ReactNode;
+  fullWidth?: boolean;
 }) => {
   return (
-    <Column>
+    <Column style={fullWidth ? { gridColumn: '1 / -1' } : undefined}>
       <Label>{label}</Label>
       <Row alignItems="center" gap>
         {icon && <Icon>{icon}</Icon>}

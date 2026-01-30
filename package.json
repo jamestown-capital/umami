@@ -16,6 +16,7 @@
     "start": "next start",
     "build-docker": "npm-run-all build-db build-tracker build-geo build-app",
     "start-docker": "npm-run-all check-db update-tracker start-server",
+    "build-image": "bash scripts/build-image.sh",
     "start-env": "node scripts/start-env.js",
     "start-server": "node server.js",
     "build-app": "next build --turbo",

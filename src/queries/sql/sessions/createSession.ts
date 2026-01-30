@@ -20,6 +20,7 @@ export async function createSession(data: Prisma.SessionCreateInput) {
       region,
       city,
       user_agent,
+      ip_address,
       distinct_id,
       created_at
     )
@@ -35,6 +36,7 @@ export async function createSession(data: Prisma.SessionCreateInput) {
       {{region}},
       {{city}},
       {{userAgent}},
+      {{ipAddress}},
       {{distinctId}},
       {{createdAt}}
     )
