@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { DateDistance } from '@/components/common/DateDistance';
 import { TypeIcon } from '@/components/common/TypeIcon';
 import { useFormat, useLocale, useMessages, useRegionNames } from '@/components/hooks';
-import { Calendar, KeyRound, Landmark, MapPin } from '@/components/icons';
+import { Calendar, KeyRound, Landmark, MapPin, Monitor } from '@/components/icons';
 
 export function SessionInfo({ data }) {
   const { locale } = useLocale();
@@ -59,6 +59,10 @@ export function SessionInfo({ data }) {
         icon={<TypeIcon type="device" value={data?.device} />}
       >
         {formatValue(data?.device, 'device')}
+      </Info>
+
+      <Info label={formatMessage(labels.userAgent)} icon={<Monitor />}>
+        {data?.userAgent}
       </Info>
     </Grid>
   );

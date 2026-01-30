@@ -241,6 +241,7 @@ export const labels = defineMessages({
   city: { id: 'label.city', defaultMessage: 'City' },
   browser: { id: 'label.browser', defaultMessage: 'Browser' },
   device: { id: 'label.device', defaultMessage: 'Device' },
+  userAgent: { id: 'label.user-agent', defaultMessage: 'User agent' },
   pageTitle: { id: 'label.pageTitle', defaultMessage: 'Page title' },
   tag: { id: 'label.tag', defaultMessage: 'Tag' },
   segment: { id: 'label.segment', defaultMessage: 'Segment' },

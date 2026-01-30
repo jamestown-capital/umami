@@ -33,6 +33,7 @@ export interface SaveEventArgs {
   country?: string;
   region?: string;
   city?: string;
+  userAgent?: string;
 
   // Events
   eventName?: string;
@@ -172,6 +173,7 @@ async function clickhouseQuery({
   country,
   region,
   city,
+  userAgent,
   eventName,
   eventData,
   tag,
@@ -199,6 +201,7 @@ async function clickhouseQuery({
     country: country,
     region: country && region ? (region.includes('-') ? region : `${country}-${region}`) : null,
     city: city,
+    user_agent: userAgent,
     url_path: urlPath?.substring(0, URL_LENGTH),
     url_query: urlQuery?.substring(0, URL_LENGTH),
     utm_source: utmSource,

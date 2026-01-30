@@ -148,6 +148,7 @@ export async function POST(request: Request) {
         country,
         region,
         city,
+        userAgent,
         distinctId: id,
         createdAt,
       });
@@ -237,6 +238,7 @@ export async function POST(request: Request) {
         country,
         region,
         city,
+        userAgent,
 
         // Events
         eventName: name,
