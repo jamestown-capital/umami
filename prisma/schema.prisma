@@ -148,7 +148,7 @@ model EventData {
   websiteId      String    @map("website_id") @db.Uuid
   websiteEventId String    @map("website_event_id") @db.Uuid
   dataKey        String    @map("data_key") @db.VarChar(500)
-  stringValue    String?   @map("string_value") @db.VarChar(500)
+  stringValue    String?   @map("string_value") @db.Text
   numberValue    Decimal?  @map("number_value") @db.Decimal(19, 4)
   dateValue      DateTime? @map("date_value") @db.Timestamptz(6)
   dataType       Int       @map("data_type") @db.Integer
