@@ -1,3 +1,6 @@
+import { initFingerprint } from './fingerprint';
+import { initInteractionScore } from './interaction';
+
 (window => {
   const {
     screen: { width, height },
@@ -175,6 +178,8 @@
       if (data) {
         disabled = !!data.disabled;
         cache = data.cache;
+        if (data.sessionId) sessionId = data.sessionId;
+        if (data.visitId) visitId = data.visitId;
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_e) {
@@ -188,6 +193,8 @@
       track();
       handlePathChanges();
       handleClicks();
+      initInteractionScore(track);
+      initFingerprint(track, () => ({ sessionId, visitId }));
     }
   };
 
@@ -229,6 +236,8 @@
   let disabled = false;
   let cache;
   let identity;
+  let sessionId;
+  let visitId;
 
   if (autoTrack && !trackingDisabled()) {
     if (document.readyState === 'complete') {
