@@ -63,8 +63,12 @@
   ],
   "pnpm": {
     "onlyBuiltDependencies": [
+      "@prisma/client",
       "@prisma/engines",
-      "prisma"
+      "cypress",
+      "esbuild",
+      "prisma",
+      "sharp"
     ]
   },
   "dependencies": {
