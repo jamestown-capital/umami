@@ -12,6 +12,8 @@ export interface WebsiteStatsData {
   visits: number;
   bounces: number;
   totaltime: number;
+  engagedVisitors: number;
+  engagedPageviews: number;
 }
 
 export async function getWebsiteStats(
@@ -40,7 +42,9 @@ async function relationalQuery(
       count(distinct t.session_id) as "visitors",
       count(distinct t.visit_id) as "visits",
       coalesce(sum(case when t.c = 1 then 1 else 0 end), 0) as "bounces",
-      cast(coalesce(sum(${getTimestampDiffSQL('t.min_time', 't.max_time')}), 0) as bigint) as "totaltime"
+      cast(coalesce(sum(${getTimestampDiffSQL('t.min_time', 't.max_time')}), 0) as bigint) as "totaltime",
+      count(distinct case when t.c > 1 then t.session_id end) as "engagedVisitors",
+      cast(coalesce(sum(case when t.c > 1 then t.c else 0 end), 0) as bigint) as "engagedPageviews"
     from (
       select
         website_event.session_id,
@@ -82,7 +86,9 @@ async function clickhouseQuery(
       uniq(t.session_id) as "visitors",
       uniq(t.visit_id) as "visits",
       sum(if(t.c = 1, 1, 0)) as "bounces",
-      sum(max_time-min_time) as "totaltime"
+      sum(max_time-min_time) as "totaltime",
+      uniqIf(t.session_id, t.c > 1) as "engagedVisitors",
+      sumIf(t.c, t.c > 1) as "engagedPageviews"
     from (
       select
         session_id,
@@ -106,7 +112,9 @@ async function clickhouseQuery(
       uniq(session_id) as "visitors",
       uniq(visit_id) as "visits",
       sumIf(1, t.c = 1) as "bounces",
-      sum(max_time-min_time) as "totaltime"
+      sum(max_time-min_time) as "totaltime",
+      uniqIf(session_id, t.c > 1) as "engagedVisitors",
+      sumIf(t.c, t.c > 1) as "engagedPageviews"
     from (select
             session_id,
             visit_id,
